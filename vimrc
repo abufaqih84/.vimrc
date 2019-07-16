@@ -5,7 +5,7 @@
 "*****************************************************************************
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "html,javascript,php"
+let g:vim_bootstrap_langs = "html,php"
 let g:vim_bootstrap_editor = "vim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
@@ -15,7 +15,7 @@ if !filereadable(vimplug_exists)
     endif
     echo "Installing Vim-Plug..."
     echo ""
-    silent exec "!\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     let g:not_finish_vimplug = "yes"
 
     autocmd VimEnter * PlugInstall
@@ -36,7 +36,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
-Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'w0rp/ale'
@@ -44,6 +43,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
+Plug 'valloric/youcompleteme'
+
 
 if isdirectory('/usr/local/opt/fzf')
     Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -61,6 +62,10 @@ Plug 'Shougo/vimproc.vim', {'do': g:make}
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
+"" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 "" Color
 Plug 'NLKNguyen/papercolor-theme'
 
@@ -68,17 +73,10 @@ Plug 'NLKNguyen/papercolor-theme'
 "" Custom bundles
 "*****************************************************************************
 
-" Snippet Plugin
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
-Plug 'chrisgillis/vim-bootstrap3-snippets'
-
-" ====================================
-
-Plug 'kien/ctrlp.vim'
-Plug 'majutsushi/tagbar'
+"" Framework
+Plug 'jvanja/vim-bootstrap4-snippets'
+Plug 'jwalton512/vim-blade'
+Plug 'noahfrederick/vim-laravel'
 
 
 "*****************************************************************************
@@ -359,9 +357,9 @@ nnoremap <silent> <leader>e :FZF -m<CR>
 nmap <leader>y :History:<CR>
 
 " snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
 " ale
@@ -494,3 +492,5 @@ endif
 " Seting tambahan
 
 autocmd BufNewFile,BufRead *.blade.php setlocal ft=html "ekstensi blade.php
+
+set mouse=a "allow mouse on terminal
